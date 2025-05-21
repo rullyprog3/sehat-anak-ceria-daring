@@ -1,6 +1,15 @@
 
 import MainLayout from "@/layouts/MainLayout";
-import { User, Users, Settings } from "lucide-react";
+import { User, Users, Settings, Info, Clipboard, Book } from "lucide-react";
+
+// Map for FeatureCard: only use allowed icons
+const iconMap = {
+  Info,
+  Clipboard,
+  Book,
+  Users,
+  Settings,
+};
 
 const roleIntro = {
   siswa: {
@@ -23,9 +32,11 @@ const roleIcon = {
   admin: Settings,
 };
 
+// Fix: MainLayout expects its children to be a render function. Make a wrapper to ensure this style works.
 const Index = () => (
   <MainLayout>
-    {({ role }: { role: "siswa" | "guru" | "admin" }) => {
+    {(args: { role: "siswa" | "guru" | "admin" }) => {
+      const { role } = args;
       const Icon = roleIcon[role];
       return (
         <div className="flex flex-col gap-6 items-center justify-center h-[70vh] animate-fade-in">
@@ -77,14 +88,5 @@ function FeatureCard({ title, desc, icon, to }: { title: string; desc: string; i
     </a>
   );
 }
-
-// Ikon usable (lucide-react)
-const iconMap = {
-  Info: require("lucide-react").Info,
-  Clipboard: require("lucide-react").Clipboard,
-  Book: require("lucide-react").Book,
-  Users: require("lucide-react").Users,
-  Settings: require("lucide-react").Settings
-};
 
 export default Index;
