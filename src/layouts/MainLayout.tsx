@@ -1,11 +1,14 @@
-
 import { useState } from "react";
 import { AppSidebar } from "@/components/AppSidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 
 type Role = "siswa" | "guru" | "admin";
 
-export default function MainLayout({ children }: { children: React.ReactNode }) {
+interface MainLayoutProps {
+  children: (args: { role: Role }) => React.ReactNode;
+}
+
+export default function MainLayout({ children }: MainLayoutProps) {
   const [role, setRole] = useState<Role>("siswa");
 
   return (
